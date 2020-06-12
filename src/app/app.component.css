@@ -1,0 +1,30 @@
+.outer {
+  background-color: #f3f3f3;
+  height: 100%;
+  padding: 0.5rem;
+}
+.inner {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  min-width: 300px;
+  max-width: 370px;
+  margin: auto;
+}
+
+.container {
+  padding: 1rem;
+  padding-bottom: 0.1rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.addTaskContainer {
+  background-color: #f3f3f4;
+  min-width: 300px;
+  max-width: 370px;
+  margin: auto;
+  border-radius: 4px;
+}
+
+.m-top {
+  margin-top: 3px;
+}

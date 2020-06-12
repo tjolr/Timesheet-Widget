@@ -1,0 +1,42 @@
+p {
+  margin-bottom: 3px;
+}
+
+.date {
+  font-weight: 600;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.38rem;
+  min-width: 1.2rem;
+  border: 1px solid transparent;
+}
+.today {
+  border: 1px solid #f08900;
+}
+.selectedDate {
+  background-color: #f08900;
+  color: white;
+}
+.weekend {
+  color: #a1a1a1;
+}
+
+.dot {
+  font-size: 6px;
+}
+
+.rejected {
+  color: rgb(248, 101, 101);
+}
+
+.approved {
+  color: rgb(51, 230, 111);
+}
+
+.tasksRegistered {
+  color: gray;
+}
+
+.noTasks {
+  color: transparent;
+}

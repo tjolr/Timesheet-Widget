@@ -1,0 +1,22 @@
+<div *ngIf="this.events.length > 0">
+  <div class="eventHeading">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"
+      >more_time</mat-icon
+    >
+    <p>Additional Hours</p>
+  </div>
+
+  <div class="eventContainer">
+    <p class="fadeTitle">Type</p>
+    <p class="fadeTitle textRight">Amount</p>
+
+    <div *ngFor="let workevent of events">
+      <p class="textLeft">
+        {{ workevent.eventTypeName }}
+      </p>
+      <p class="textRight">
+        {{ workevent.quantity }}
+      </p>
+    </div>
+  </div>
+</div>

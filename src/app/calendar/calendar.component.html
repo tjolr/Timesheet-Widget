@@ -1,0 +1,28 @@
+<div class="container">
+  <p class="p-16 top-heading">
+    {{ selectedDate | date: "MMMM" }} {{ selectedDate.getFullYear() }}
+  </p>
+
+  <mat-icon mat-icon-button class="top-right" (click)="goToToday()"
+    >calendar_today</mat-icon
+  >
+  <div class="caldays">
+    <app-calendarday
+      *ngFor="let day of weekdays"
+      [day]="day"
+      [weekend]="dateIsWeekend(day)"
+      [selectedDate]="datesAreOnSameDay(selectedDate, day)"
+      [today]="datesAreOnSameDay(today, day)"
+      class="inside"
+      (click)="onSelect(day)"
+    >
+    </app-calendarday>
+  </div>
+</div>
+<div>
+  <div class="divider"></div>
+
+  <div class="container">
+    <p class="dayHeader">{{ selectedDate | date: "EEEE dd.LL.yyyy" }}</p>
+  </div>
+</div>

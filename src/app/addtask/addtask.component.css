@@ -1,0 +1,11 @@
+.taskContainer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.addTaskButton {
+  background-color: #f08900;
+
+  color: white;
+  width: 100%;
+}

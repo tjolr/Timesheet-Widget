@@ -1,0 +1,42 @@
+<div *ngIf="this.events.length > 0">
+  <div class="eventHeading">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"
+      >attach_money</mat-icon
+    >
+    <p>Expenses</p>
+  </div>
+
+  <div class="eventContainer">
+    <table style="width: 100%;">
+      <tr>
+        <td>
+          <p class="fadeTitle">Type</p>
+        </td>
+        <td>
+          <p class="fadeTitle textRight">Quantity</p>
+        </td>
+        <td>
+          <p class="fadeTitle textRight">Total</p>
+        </td>
+      </tr>
+
+      <tr *ngFor="let workevent of events">
+        <td>
+          <p *ngIf="workevent.isExpenseType">
+            {{ workevent.eventTypeName }}
+          </p>
+        </td>
+        <td>
+          <p *ngIf="workevent.isExpenseType" class="textRight">
+            {{ workevent.quantity }}
+          </p>
+        </td>
+        <td>
+          <p *ngIf="workevent.isExpenseType" class="textRight">
+            {{ workevent.price * workevent.quantity }}
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div *ngIf="this.events.length > 0">
+  <div class="eventHeading">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"
+      >access_time</mat-icon
+    >
+    <p>Hours</p>
+    <p class="flexboxRight fadeTitle">
+      ({{ firstTaskStart | date: "HH:mm" }} - {{ lastTaskEnd | date: "HH:mm" }})
+    </p>
+  </div>
+
+  <div class="eventContainer">
+    <p class="fadeTitle">Type</p>
+    <p class="fadeTitle textRight">Duration</p>
+
+    <div *ngFor="let workevent of events">
+      <p *ngIf="workevent.isWorkHour" class="textLeft">
+        {{ workevent.eventTypeName }}
+      </p>
+      <p *ngIf="workevent.isWorkHour" class="textRight">
+        {{ workevent.quantity | decimalToHourFormat }}
+      </p>
+    </div>
+  </div>
+</div>

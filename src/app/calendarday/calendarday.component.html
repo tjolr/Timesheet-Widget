@@ -1,0 +1,20 @@
+<p>{{ day | date: "E" }}</p>
+<p
+  [class.selectedDate]="selectedDate"
+  [class.weekend]="weekend"
+  [class.today]="today"
+  class="date selectedDate"
+>
+  {{ day | date: "d" }}
+</p>
+<p class="f-12" style="margin-bottom: 0;">
+  {{ getHoursWorkedOnDateFormatted(day) }}
+</p>
+<p>
+  <mat-icon
+    aria-hidden="false"
+    class="dot"
+    [ngClass]="getApprovalStateOnDate(day)"
+    >stop_circle</mat-icon
+  >
+</p>

@@ -1,0 +1,36 @@
+.top-right {
+  float: right;
+}
+.top-right:hover {
+  color: #f08900;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.caldays {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.inside {
+  text-align: center;
+}
+
+.dayHeader {
+  font-weight: 500;
+}
+
+.divider {
+  background-color: #f3f3f4;
+  height: 0.15rem;
+  width: 100%;
+}
+
+.container {
+  padding: 1rem;
+  padding-bottom: 0.1rem;
+  background-color: white;
+  border-radius: 4px;
+}

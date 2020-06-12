@@ -1,0 +1,37 @@
+.eventContainer {
+    padding: 0.5rem;
+}
+.eventHeading {
+    background-color: #F3F3F4;
+    border-radius: 4px;
+    padding:0.5em;
+    display: flex;
+    align-items: center;
+}
+
+.eventHeading > p {
+
+    margin-bottom: 0;
+    font-weight: 470;
+    display: inline-block;
+}
+.eventHeading > mat-icon {
+    margin-right: 0.15rem;
+}
+
+.flexboxRight {
+    margin-left: auto;
+}
+
+.fadeTitle {
+    color: #a1a1a1;
+    display: inline-block;
+}
+.textLeft {
+    display: inline-block;
+}
+
+.textRight {
+    float: right;
+    display: inline;
+}

@@ -1,0 +1,10 @@
+.container {
+  background-color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.goBackButton {
+  background-color: #f08900;
+  color: white;
+}
