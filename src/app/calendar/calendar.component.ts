@@ -4,14 +4,12 @@ import { WeekdayComponent } from '../weekday/weekday.component';
 import { DatePipe } from '@angular/common';
 import { CalendardayComponent } from '../calendarday/calendarday.component';
 
-
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
-
   month: string;
   year: number;
   weekdays: Array<Date>;
@@ -19,12 +17,14 @@ export class CalendarComponent implements OnInit {
   selectedDate: Date;
   today: Date;
 
-  constructor(private calendarService: CalendarService) { }
+  constructor(private calendarService: CalendarService) {}
 
   ngOnInit(): void {
     this.getToday();
     this.getWeekdays();
-    this.calendarService.selectedDate.subscribe(selectedDate => this.selectedDate = selectedDate);
+    this.calendarService.selectedDate.subscribe(
+      (selectedDate) => (this.selectedDate = selectedDate)
+    );
   }
 
   onSelect(date: Date): void {
@@ -32,19 +32,21 @@ export class CalendarComponent implements OnInit {
   }
 
   getToday(): void {
-    this.calendarService.getToday().subscribe(today => this.today = today);
-    this.selectedDate = this.today;
+    this.calendarService.getToday().subscribe((today) => {
+      this.today = today;
+      this.selectedDate = this.today;
+    });
   }
 
   goToToday(): void {
     this.calendarService.changeSelectedDate(this.today);
   }
 
-
   getWeekdays(): void {
-    this.calendarService.generateWeekdays().subscribe(weekdays => this.weekdays = weekdays);
+    this.calendarService
+      .generateWeekdays()
+      .subscribe((weekdays) => (this.weekdays = weekdays));
   }
-
 
   datesAreOnSameDay(first: Date, second: Date): boolean {
     return first.toDateString() === second.toDateString();

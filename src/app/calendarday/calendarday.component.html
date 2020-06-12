@@ -11,10 +11,8 @@
   {{ getHoursWorkedOnDateFormatted(day) }}
 </p>
 <p>
-  <mat-icon
-    aria-hidden="false"
-    class="dot"
-    [ngClass]="getApprovalStateOnDate(day)"
+  <!-- [ngClass]="getApprovalStateOnDate(day)" -->
+  <mat-icon aria-hidden="false" class="dot" [appApprovalState]="approvalColor"
     >stop_circle</mat-icon
   >
 </p>

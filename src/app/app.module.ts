@@ -21,6 +21,7 @@ import { AddtaskComponent } from './addtask/addtask.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DummypageComponent } from './dummypage/dummypage.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ApprovalStateDirective } from './approval-state.directive';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     AddtaskComponent,
     DummypageComponent,
     HomepageComponent,
+    ApprovalStateDirective,
   ],
   imports: [
     BrowserModule,

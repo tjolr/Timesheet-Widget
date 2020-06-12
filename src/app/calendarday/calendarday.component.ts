@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { EventService } from '../events.service';
 import { Eventbyday } from '../eventbyday';
 
@@ -14,13 +14,13 @@ export class CalendardayComponent implements OnInit {
   @Input() weekend: boolean;
 
   events: Eventbyday[];
-  approvalState: string;
-  
+  approvalColor: string;
 
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
     this.getEvents();
+    this.getApprovalStateOnDate(this.day);
   }
 
   getEvents(): void {
@@ -29,8 +29,11 @@ export class CalendardayComponent implements OnInit {
 
   getHoursWorkedOnDate(date: Date): number {
     let workedHours: number = 0;
-    for(const event of this.events) {
-      if (event.isWorkHour && (date.toDateString() == event.date.toDateString())) {
+    for (const event of this.events) {
+      if (
+        event.isWorkHour &&
+        date.toDateString() == event.date.toDateString()
+      ) {
         workedHours += event.quantity;
       }
     }
@@ -39,52 +42,55 @@ export class CalendardayComponent implements OnInit {
 
   getHoursWorkedOnDateFormatted(date: Date): any {
     let workedHours: number = this.getHoursWorkedOnDate(date);
-    if ( workedHours != 0) {
+    if (workedHours != 0) {
       return this.convertToHHMM(workedHours);
     } else {
-      return '-'
+      return '-';
     }
   }
 
+  //toPipe
   convertToHHMM(info) {
     var hrs = parseInt(info);
-    var min = Math.round((info-hrs) * 60);
+    var min = Math.round((info - hrs) * 60);
     var min_pad: string = ('0' + String(min)).slice(-2);
-    return hrs+':'+min_pad;
+    return hrs + ':' + min_pad;
   }
 
   getAllEventsOnDate(date: Date): Eventbyday[] {
     let eventsOnDate: Eventbyday[] = [];
-    for(const event of this.events){
-      if (event.date.toDateString() === date.toDateString()){
+    for (const event of this.events) {
+      if (event.date.toDateString() === date.toDateString()) {
         eventsOnDate.push(event);
       }
     }
     return eventsOnDate;
   }
 
-  
-
-  getApprovalStateOnDate(date: Date): string {
+  //Directive
+  getApprovalStateOnDate(date: Date): void {
     let allTasksApproved: boolean = true;
     let events = this.getAllEventsOnDate(date);
     if (events.length == 0) {
-      return "noTasks";
+      this.approvalColor = 'transparent';
+      return;
     }
 
     for (const event of events) {
       if (event.isRejected) {
-        return "rejected";
+        this.approvalColor = 'rgb(248, 101, 101)';
+        return;
       }
       if (!event.isApproved) {
         allTasksApproved = false;
       }
     }
     if (allTasksApproved) {
-      return "approved";
+      this.approvalColor = 'rgb(51, 230, 111)';
+      return;
     } else {
-      return "tasksRegistered";
-    } 
-
+      this.approvalColor = '#a1a1a1';
+      return;
+    }
   }
 }

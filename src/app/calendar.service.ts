@@ -4,15 +4,15 @@ import { formatDate } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class CalendarService {  
+export class CalendarService {
   private today: Date = new Date();
 
   private selectedDateSource = new BehaviorSubject(this.today);
   selectedDate = this.selectedDateSource.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   changeSelectedDate(date: Date) {
     this.selectedDateSource.next(date);
@@ -21,7 +21,6 @@ export class CalendarService {
   getToday(): Observable<Date> {
     return of(this.today);
   }
-
 
   generateWeekdays(): Observable<Array<Date>> {
     let weekdays: Array<Date> = [];
@@ -32,5 +31,4 @@ export class CalendarService {
     }
     return of(weekdays);
   }
-
 }
