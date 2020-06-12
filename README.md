@@ -1,5 +1,10 @@
 # TimesheetWidget
 
+In the timesheetwidget a user can view an overview of their week, and how many hours they have been working and see their work related expenses during the day.
+![Alt text](/src/screenshots/TimesheetWidget.PNG?raw=true "Homepage")
+
+# Angular
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
 ## Development server
@@ -25,5 +30,3 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-![Alt text](/src/screenshots/TimesheetWidget.PNG?raw=true "Homepage")
