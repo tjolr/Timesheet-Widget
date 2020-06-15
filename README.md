@@ -1,6 +1,7 @@
 # TimesheetWidget
 
 In the timesheetwidget a user can view an overview of their week, and how many hours they have been working and see their work related expenses during the day.
+
 ![Alt text](/src/screenshots/TimesheetWidget.PNG?raw=true "Homepage")
 
 # Angular
