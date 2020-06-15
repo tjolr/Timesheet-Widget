@@ -2,7 +2,7 @@ import { Eventbyday } from './eventbyday';
 
 export const EVENTS: Eventbyday[] = [
   {
-    date: new Date(2020, 5, 8),
+    date: new Date(2020, 5, 15),
     quantity: 7.5,
     price: 0,
     eventTypeName: 'Arbeidstid',
@@ -17,7 +17,7 @@ export const EVENTS: Eventbyday[] = [
     lastTaskEnd: new Date(2020, 5, 29, 15, 30, 0, 0),
   },
   {
-    date: new Date(2020, 5, 8),
+    date: new Date(2020, 5, 15),
     quantity: 1,
     price: 0,
     eventTypeName: 'Overtid',
@@ -32,7 +32,7 @@ export const EVENTS: Eventbyday[] = [
     lastTaskEnd: new Date(2020, 5, 29, 16, 30, 0, 0),
   },
   {
-    date: new Date(2020, 5, 8),
+    date: new Date(2020, 5, 15),
     quantity: 1,
     price: 80,
     eventTypeName: 'Parkering',

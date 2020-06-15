@@ -8,6 +8,8 @@ import {
 import { EventService } from '../events.service';
 import { UtilsService } from '../utils.service';
 import { Eventbyday } from '../eventbyday';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-expenses',
@@ -18,6 +20,7 @@ export class ExpensesComponent implements OnChanges {
   @Input() selectedDate: Date;
 
   events: Eventbyday[];
+  private unsubscribeAll: Subject<void> = new Subject<void>();
 
   constructor(
     private eventService: EventService,
@@ -28,8 +31,16 @@ export class ExpensesComponent implements OnChanges {
     this.updateExpensesFromEvent();
   }
 
+  ngOnDestroy() {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
   updateExpensesFromEvent(): void {
-    this.eventService.getEvents().subscribe((events) => (this.events = events));
+    this.eventService
+      .getEvents()
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe((events) => (this.events = events));
     this.events = this.utilsService.getAllEventsOnDateWithType(
       this.selectedDate,
       this.events,

@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DummypageComponent } from './dummypage/dummypage.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ApprovalStateDirective } from './approval-state.directive';
+import { DecimalToHHMMPipePipe } from './pipes/decimal-to-hhmmpipe.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ApprovalStateDirective } from './approval-state.directive';
     DummypageComponent,
     HomepageComponent,
     ApprovalStateDirective,
+    DecimalToHHMMPipePipe,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { ApprovalStateDirective } from './approval-state.directive';
     MatButtonModule,
     AppRoutingModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, DecimalToHHMMPipePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

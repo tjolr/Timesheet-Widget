@@ -8,13 +8,9 @@ export class UtilsService {
   constructor() {}
 
   getAllEventsOnDate(date: Date, events: Eventbyday[]): Eventbyday[] {
-    let eventsOnDate: Eventbyday[] = [];
-    for (const event of events) {
-      if (event.date.toDateString() === date.toDateString()) {
-        eventsOnDate.push(event);
-      }
-    }
-    return eventsOnDate;
+    return events.filter(
+      (event) => event.date.toDateString() === date.toDateString()
+    );
   }
 
   getAllEventsOnDateWithType(
@@ -22,15 +18,9 @@ export class UtilsService {
     events: Eventbyday[],
     eventType: string
   ): Eventbyday[] {
-    let eventsOnDate: Eventbyday[] = [];
-    for (const event of events) {
-      if (
-        event.date.toDateString() === date.toDateString() &&
-        (event[eventType])
-      ) {
-        eventsOnDate.push(event);
-      }
-    }
-    return eventsOnDate;
+    return events.filter(
+      (event) =>
+        event.date.toDateString() === date.toDateString() && event[eventType]
+    );
   }
 }

@@ -1,7 +1,15 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { EventService } from '../events.service';
 import { UtilsService } from '../utils.service';
 import { Eventbyday } from '../eventbyday';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-hours',
@@ -14,24 +22,37 @@ export class HoursComponent implements OnChanges {
   events: Eventbyday[];
   firstTaskStart: Date;
   lastTaskEnd: Date;
+  private unsubscribeAll: Subject<void> = new Subject<void>();
 
   constructor(
     private eventService: EventService,
     private utilsService: UtilsService
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {  
+  ngOnChanges(changes: SimpleChanges) {
     this.updateHoursFromEvent();
     this.updateStartEndTime();
   }
-  
+
+  ngOnDestroy() {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
   updateHoursFromEvent(): void {
-    this.eventService.getEvents().subscribe(events => this.events = events);
-    this.events = this.utilsService.getAllEventsOnDateWithType(this.selectedDate, this.events, "isHoursEventType");
+    this.eventService
+      .getEvents()
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe((events) => (this.events = events));
+    this.events = this.utilsService.getAllEventsOnDateWithType(
+      this.selectedDate,
+      this.events,
+      'isHoursEventType'
+    );
   }
 
   updateStartEndTime(): void {
-    var dates: Date[] = [];
+    const dates: Date[] = [];
     for (const event of this.events) {
       dates.push(event.firstTastStart);
       dates.push(event.lastTaskEnd);
@@ -45,7 +66,6 @@ export class HoursComponent implements OnChanges {
   sortDates(date1: Date, date2: Date) {
     let firstDate = new Date(date1).getTime();
     let secondDate = new Date(date2).getTime();
-    return firstDate > secondDate ? 1: -1;
+    return firstDate > secondDate ? 1 : -1;
   }
-  
 }

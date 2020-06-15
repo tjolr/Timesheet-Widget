@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { EventService } from '../events.service';
 import { Eventbyday } from '../eventbyday';
+import { DecimalToHHMMPipePipe } from '../pipes/decimal-to-hhmmpipe.pipe';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-calendarday',
@@ -15,56 +18,54 @@ export class CalendardayComponent implements OnInit {
 
   events: Eventbyday[];
   approvalColor: string;
+  private unsubscribeAll: Subject<void> = new Subject<void>();
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private decimalToHHMMPipe: DecimalToHHMMPipePipe
+  ) {}
 
   ngOnInit(): void {
     this.getEvents();
     this.getApprovalStateOnDate(this.day);
   }
 
+  ngOnDestroy() {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+  }
+
   getEvents(): void {
-    this.eventService.getEvents().subscribe((events) => (this.events = events));
+    this.eventService
+      .getEvents()
+      .pipe(takeUntil(this.unsubscribeAll))
+      .subscribe((events) => (this.events = events));
   }
 
   getHoursWorkedOnDate(date: Date): number {
     let workedHours: number = 0;
-    for (const event of this.events) {
-      if (
-        event.isWorkHour &&
-        date.toDateString() == event.date.toDateString()
-      ) {
-        workedHours += event.quantity;
-      }
-    }
+    this.events
+      .filter(
+        (event) =>
+          event.isWorkHour && date.toDateString() === event.date.toDateString()
+      )
+      .map((event) => (workedHours += event.quantity));
     return workedHours;
   }
 
   getHoursWorkedOnDateFormatted(date: Date): any {
     let workedHours: number = this.getHoursWorkedOnDate(date);
     if (workedHours != 0) {
-      return this.convertToHHMM(workedHours);
+      return this.decimalToHHMMPipe.transform(workedHours);
     } else {
       return '-';
     }
   }
 
-  //toPipe
-  convertToHHMM(info) {
-    var hrs = parseInt(info);
-    var min = Math.round((info - hrs) * 60);
-    var min_pad: string = ('0' + String(min)).slice(-2);
-    return hrs + ':' + min_pad;
-  }
-
   getAllEventsOnDate(date: Date): Eventbyday[] {
-    let eventsOnDate: Eventbyday[] = [];
-    for (const event of this.events) {
-      if (event.date.toDateString() === date.toDateString()) {
-        eventsOnDate.push(event);
-      }
-    }
-    return eventsOnDate;
+    return this.events.filter(
+      (event) => event.date.toDateString() === date.toDateString()
+    );
   }
 
   //Directive
